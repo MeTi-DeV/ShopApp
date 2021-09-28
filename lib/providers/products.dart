@@ -39,10 +39,13 @@ class Products with ChangeNotifier {
   List<Product> get items {
     return [..._items];
   }
-//comment 1 :here create a function that its work for show details of the each product by id of that product
+
   Product findById(String id) {
-  
     return _items.firstWhere((product) => product.id == id);
+  }
+//comment 1 : add FavoriteList here and use it in ProductGrid widget
+  List<Product> get FavoriteList {
+    return _items.where((productItem) => productItem.isFavorite).toList();
   }
 
   void addProducts() {
