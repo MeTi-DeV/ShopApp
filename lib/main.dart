@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/products_detaills_screen.dart';
 import './providers/products.dart';
 import './screens/overview_products_screen.dart';
-
+import './screens/cart_screen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -12,8 +12,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //comment 1 : MultiProvider use for multi providers
     return MultiProvider(
+       
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => Products(),
@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx)=>Cart())
       ],
       child: MaterialApp(
+       
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primarySwatch: Colors.purple,
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         title: 'My Shop',
         home: OverviewProductsScreen(),
         routes: {
-          ProductsDetaillsScreen.routeName: (ctx) => ProductsDetaillsScreen()
+          ProductsDetaillsScreen.routeName: (ctx) => ProductsDetaillsScreen(),
+          CartScreen.routeName: (ctx) => CartScreen()
         },
       ),
     );
