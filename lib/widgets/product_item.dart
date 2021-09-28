@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/product.dart';
+import '../providers/cart.dart';
 
 class ProductItem extends StatelessWidget {
   // final String id;
@@ -10,8 +11,9 @@ class ProductItem extends StatelessWidget {
   // ProductItem(this.id, this.imageUrl, this.title, this.price);
   @override
   Widget build(BuildContext context) {
-    //comment 2 : change product to listen off other than favorite icon part that created by Consumer
     final product = Provider.of<Product>(context, listen: false);
+    // comment 1 : get Cart class for addItem handler to Cart 
+    final cart = Provider.of<Cart>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -28,13 +30,6 @@ class ProductItem extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           title: Text(product.title, textAlign: TextAlign.center),
-          //comment 1 : Consumer is for components that only change in big components we can put them in this widget
-          // like here now the button that changing is favorite icon so put it in Consumer
-          //Consumer has 3 parameters
-          //context ,
-          //product: the object we will get  data from that
-          // child: here I chnge it to _ because I dont use it
-          // but child is for a  part of Consumer widget that is will never chnage and its fix always
           leading: Consumer<Product>(builder: (context, product, _) {
             return IconButton(
               onPressed: () => product.toggledStatusFavorite(),
@@ -44,7 +39,8 @@ class ProductItem extends StatelessWidget {
             );
           }),
           trailing: IconButton(
-            onPressed: () {},
+            //comment 2 : get addItem function from Cart widget to here
+            onPressed:()=> cart.addItem(product.id, product.title, product.price),
             icon: Icon(Icons.shopping_cart),
             color: Theme.of(context).accentColor,
           ),
