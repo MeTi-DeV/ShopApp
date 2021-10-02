@@ -44,7 +44,6 @@ class Cart with ChangeNotifier {
   int get itemCount {
     return _items.length;
   }
-//comment 1 : calculate total price for user cart like this
   double get totalAmount {
     var total = 0.0;
     _items.forEach(
@@ -53,5 +52,10 @@ class Cart with ChangeNotifier {
       },
     );
     return total;
+  }
+  //comment 1 : here create removeItem handler for remove each item in cart
+  void removeItem(String productId){
+    _items.remove(productId);
+    notifyListeners();
   }
 }
