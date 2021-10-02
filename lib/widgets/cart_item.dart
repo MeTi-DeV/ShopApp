@@ -68,8 +68,7 @@ class CartItem extends StatelessWidget {
         ),
       ),
       direction: DismissDirection.endToStart,
-      //comment 4 : one of most important properties is onDismissed like onPressed and here we pass our behavior that we want like here I add removeItem function in Cart Class and get it here for onDismissed behavior
-      // here add this property for decrise deleted items from total amount
+      
       onDismissed: (directin) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },

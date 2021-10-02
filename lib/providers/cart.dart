@@ -44,6 +44,7 @@ class Cart with ChangeNotifier {
   int get itemCount {
     return _items.length;
   }
+
   double get totalAmount {
     var total = 0.0;
     _items.forEach(
@@ -53,9 +54,15 @@ class Cart with ChangeNotifier {
     );
     return total;
   }
+
   //comment 1 : here create removeItem handler for remove each item in cart
-  void removeItem(String productId){
+  void removeItem(String productId) {
     _items.remove(productId);
+    notifyListeners();
+  }
+//comment 2 : add CartClear for clear cart list when add all  cart items to order screen
+  void CartClear() {
+    _items = {};
     notifyListeners();
   }
 }
